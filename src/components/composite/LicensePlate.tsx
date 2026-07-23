@@ -8,22 +8,28 @@ interface LicensePlateProps {
   className?: string
 }
 
-// ─── Argentine flag, with the Sol de Mayo ────────────────────────────────────
+// ─── Argentine flag — flat badge style, with an 8-point star ─────────────────
 function FlagSwatch() {
   return (
-    <svg
-      viewBox="0 0 160 100"
-      className="w-5 h-3.5 rounded-[1px] overflow-hidden shrink-0 border border-white/40"
-      aria-hidden="true"
-    >
-      <rect width="160" height="33.34" y="0" fill="#75AADB" />
-      <rect width="160" height="33.33" y="33.34" fill="#FFFFFF" />
-      <rect width="160" height="33.33" y="66.67" fill="#75AADB" />
-      <circle cx="80" cy="50" r="20" fill="none" stroke="#F6B40E" strokeWidth="6" strokeDasharray="3 4.2" />
-      <circle cx="80" cy="50" r="13" fill="#F6B40E" stroke="#8B5E0A" strokeWidth="1" />
-      <circle cx="75.5" cy="47.5" r="1.4" fill="#8B5E0A" />
-      <circle cx="84.5" cy="47.5" r="1.4" fill="#8B5E0A" />
-      <path d="M75 55 Q80 58.5 85 55" stroke="#8B5E0A" strokeWidth="1.2" fill="none" strokeLinecap="round" />
+    <svg viewBox="0 0 512 512" className="w-5 h-3.5 shrink-0" aria-hidden="true">
+      <defs>
+        <clipPath id="flag-badge-clip">
+          <rect x="80" y="131" width="350" height="250" rx="40" />
+        </clipPath>
+      </defs>
+      <g clipPath="url(#flag-badge-clip)">
+        <rect x="80" y="131" width="350" height="83.3" fill="#00A9E0" />
+        <rect x="80" y="214.3" width="350" height="83.4" fill="#EDEDED" />
+        <rect x="80" y="297.7" width="350" height="83.3" fill="#00A9E0" />
+        {/* fold shadow + darker flutter along the right edge */}
+        <rect x="368" y="131" width="30" height="250" fill="#000000" opacity="0.08" />
+        <path d="M398 131 Q446 256 398 381 L430 381 L430 131 Z" fill="#0072A8" />
+        {/* 8-point star */}
+        <path
+          fill="#FFE800"
+          d="M256,186 L266.7,230.1 L305.5,206.5 L281.9,245.3 L326,256 L281.9,266.7 L305.5,305.5 L266.7,281.9 L256,326 L245.3,281.9 L206.5,305.5 L230.1,266.7 L186,256 L230.1,245.3 L206.5,206.5 L245.3,230.1 Z"
+        />
+      </g>
     </svg>
   )
 }
