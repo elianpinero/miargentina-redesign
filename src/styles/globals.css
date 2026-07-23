@@ -1,0 +1,186 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Lora:wght@700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─── CSS Custom Properties ──────────────────────────────────────────────── */
+:root {
+  /* Brand */
+  --navy-900: #0b1742;
+  --navy-800: #13265e;
+  --navy-700: #1a3380;
+  --gold-500: #ffb81c;
+  --gold-400: #fcbf45;
+
+  /* Surfaces */
+  --bg-primary: #f5f6fa;
+  --surface-primary: #ffffff;
+
+  /* Text */
+  --text-primary: #111827;
+  --text-secondary: #6b7280;
+
+  /* Semantic */
+  --success-soft: #e2f6ec;
+  --info-soft: #d0e7f8;
+
+  /* Tab Bar (iOS) */
+  --tabbar-height: 83px;
+  --tabbar-bg: rgba(255, 255, 255, 0.85);
+  --tabbar-border: rgba(0, 0, 0, 0.08);
+
+  /* Safe areas */
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+/* ─── Base ───────────────────────────────────────────────────────────────── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  height: 100%;
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+}
+
+body {
+  height: 100%;
+  margin: 0;
+  background-color: var(--bg-primary);
+  font-family: 'Montserrat', system-ui, sans-serif;
+  color: var(--text-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* ─── Scrollbar — hidden (iOS native feel) ───────────────────────────────── */
+::-webkit-scrollbar {
+  display: none;
+}
+
+* {
+  scrollbar-width: none;
+}
+
+/* ─── Touch targets ──────────────────────────────────────────────────────── */
+button,
+a,
+[role='button'],
+[role='tab'] {
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+/* ─── Focus visible — AA accessibility ──────────────────────────────────── */
+:focus-visible {
+  outline: 2px solid var(--navy-800);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* ─── Layer: components ──────────────────────────────────────────────────── */
+@layer components {
+  /* Typography */
+  .font-serif {
+    font-family: 'Lora', Georgia, serif;
+  }
+
+  .font-sans {
+    font-family: 'Montserrat', system-ui, sans-serif;
+  }
+
+  /* Logo */
+  .logo-mi {
+    font-family: 'Lora', serif;
+    font-weight: 700;
+    color: var(--gold-500);
+  }
+
+  .logo-argentina {
+    font-family: 'Lora', serif;
+    font-weight: 700;
+    color: #ffffff;
+  }
+
+  /* Cards */
+  .card-surface {
+    background: var(--surface-primary);
+    border-radius: 20px;
+    box-shadow: 0 2px 16px rgba(11, 23, 66, 0.07), 0 1px 4px rgba(11, 23, 66, 0.04);
+    overflow: hidden;
+  }
+
+  /* Glass effect */
+  .glass {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+  }
+
+  /* iOS Tab Bar */
+  .tabbar-glass {
+    background: var(--tabbar-bg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-top: 0.5px solid var(--tabbar-border);
+  }
+
+  /* Institutional header gradient */
+  .header-gradient {
+    background: linear-gradient(160deg, var(--navy-900) 0%, var(--navy-800) 100%);
+  }
+
+  /* Section label */
+  .section-label {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--text-secondary);
+    letter-spacing: 0.6px;
+    text-transform: uppercase;
+  }
+
+  /* Divider */
+  .divider {
+    height: 0.5px;
+    background: #f0f0f5;
+  }
+}
+
+/* ─── Layer: utilities ───────────────────────────────────────────────────── */
+@layer utilities {
+  /* Smooth scroll container */
+  .scroll-smooth-ios {
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
+  }
+
+  /* Safe area padding */
+  .pb-safe {
+    padding-bottom: calc(var(--tabbar-height) + 16px + var(--safe-bottom));
+  }
+
+  .pt-safe {
+    padding-top: var(--safe-top);
+  }
+
+  /* Touch target minimum */
+  .touch-target {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  /* Truncate text */
+  .text-truncate {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
