@@ -1,12 +1,10 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import Link from 'next/link'
 import { pageVariants } from '@/design-system/motion'
 import { ModuleHeader } from '@/components/composite/AppHeader'
 import { Card } from '@/components/primitives/Card'
 import { Button } from '@/components/primitives/Button'
-import { EmptyState } from '@/components/composite/EmptyState'
 import { PageContainer } from '@/layouts/PageContainer'
 import { TINA_URL } from '@/utils/constants'
 

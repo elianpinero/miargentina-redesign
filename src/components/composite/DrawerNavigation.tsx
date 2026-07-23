@@ -7,7 +7,6 @@ import { ChevronRight, LogOut, Home, User, Link2, PlusSquare, Lock, Info, FileTe
 import { Avatar, Badge } from '@/components/primitives'
 import { MOCK_USER } from '@/utils/constants'
 import { drawerVariants, drawerOverlayVariants } from '@/design-system/motion'
-import { cn } from '@/utils/cn'
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 interface DrawerProps {
