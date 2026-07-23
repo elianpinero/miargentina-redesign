@@ -1,15 +1,16 @@
+import type { LucideIcon } from 'lucide-react'
 import { cn } from '@/utils/cn'
 
 interface EmptyStateProps {
-  emoji: string
-  emojiLabel?: string
+  icon: LucideIcon
+  iconLabel?: string
   title: string
   description: string
   action?: React.ReactNode
   className?: string
 }
 
-export function EmptyState({ emoji, emojiLabel, title, description, action, className }: EmptyStateProps) {
+export function EmptyState({ icon: Icon, iconLabel, title, description, action, className }: EmptyStateProps) {
   return (
     <div
       className={cn(
@@ -19,11 +20,11 @@ export function EmptyState({ emoji, emojiLabel, title, description, action, clas
       )}
     >
       <div
-        className="w-[72px] h-[72px] rounded-[22px] bg-surface-secondary flex items-center justify-center text-[34px]"
+        className="w-[72px] h-[72px] rounded-[22px] bg-surface-secondary flex items-center justify-center"
         role="img"
-        aria-label={emojiLabel || emoji}
+        aria-label={iconLabel}
       >
-        {emoji}
+        <Icon size={30} color="#6B7280" strokeWidth={1.6} />
       </div>
       <div className="space-y-2">
         <p className="font-sans font-bold text-title-sm text-text-primary">{title}</p>

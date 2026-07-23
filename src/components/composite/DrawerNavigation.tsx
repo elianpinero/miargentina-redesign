@@ -3,9 +3,9 @@
 import { useEffect } from 'react'
 import Link from 'next/link'
 import { motion, AnimatePresence } from 'framer-motion'
-import { ChevronRight, LogOut, Home, User, Link2, PlusSquare, Lock, Info, FileText } from 'lucide-react'
+import { ChevronRight, LogOut, Home, User, Baby, PlusSquare, Lock, Info, FileText, Pencil, Check } from 'lucide-react'
 import { Avatar, Badge } from '@/components/primitives'
-import { MOCK_USER } from '@/utils/constants'
+import { MOCK_USER, TERMS_URL } from '@/utils/constants'
 import { drawerVariants, drawerOverlayVariants } from '@/design-system/motion'
 
 // ─── Types ────────────────────────────────────────────────────────────────────
@@ -16,22 +16,13 @@ interface DrawerProps {
 
 // ─── Menu items ───────────────────────────────────────────────────────────────
 const menuItems = [
-  { icon: User,      label: 'Mi perfil',              href: null },
-  { icon: Link2,     label: 'Mis datos asociados',     href: null },
-  { icon: PlusSquare,label: 'Suscribir servicios',     href: '/suscribir' },
-  { icon: Lock,      label: 'Seguridad y privacidad',  href: '/seguridad' },
-  { icon: Info,      label: 'Acerca de',               href: '/acercade' },
-  { icon: FileText,  label: 'Términos y condiciones',  href: null },
+  { icon: User,       label: 'Mi perfil',              href: '/perfil',   external: false },
+  { icon: Baby,       label: 'Hijos asociados',        href: '/hijos',    external: false },
+  { icon: PlusSquare, label: 'Suscribir servicios',    href: '/suscribir', external: false },
+  { icon: Lock,       label: 'Seguridad y privacidad', href: '/seguridad', external: false },
+  { icon: Info,       label: 'Acerca de',              href: '/acercade', external: false },
+  { icon: FileText,   label: 'Términos y condiciones', href: TERMS_URL,   external: true },
 ] as const
-
-const profileFields = [
-  { emoji: '📧', value: MOCK_USER.email },
-  { emoji: '📱', value: MOCK_USER.phone },
-  { emoji: '📍', value: MOCK_USER.address },
-  { emoji: '🪪', value: `DNI ${MOCK_USER.dni}` },
-  { emoji: '🎂', value: `${MOCK_USER.birthdate} — ${MOCK_USER.gender}` },
-  { emoji: '🌎', value: MOCK_USER.nationality },
-]
 
 // ─── Component ────────────────────────────────────────────────────────────────
 export function DrawerNavigation({ isOpen, onClose }: DrawerProps) {
@@ -79,14 +70,14 @@ export function DrawerNavigation({ isOpen, onClose }: DrawerProps) {
           >
             {/* Profile header */}
             <div className="header-gradient px-5 pt-14 pb-6">
-              <div className="flex items-center gap-3.5 mb-4">
+              <div className="flex items-center gap-3.5">
                 <div className="relative">
                   <Avatar initials={MOCK_USER.initials} size="lg" />
                   <button
                     aria-label="Editar foto de perfil"
-                    className="absolute bottom-0 right-0 w-5 h-5 bg-gold-500 rounded-full border-2 border-navy-800 flex items-center justify-center text-[10px]"
+                    className="absolute bottom-0 right-0 w-5 h-5 bg-gold-500 rounded-full border-2 border-navy-800 flex items-center justify-center"
                   >
-                    ✏️
+                    <Pencil size={10} color="#0B1742" strokeWidth={2.5} />
                   </button>
                 </div>
                 <div>
@@ -96,24 +87,17 @@ export function DrawerNavigation({ isOpen, onClose }: DrawerProps) {
                   <p className="font-sans text-caption text-white/60 mt-0.5">
                     CUIL {MOCK_USER.cuil}
                   </p>
-                  <Badge variant="green" className="mt-1.5">✓ Identidad validada</Badge>
+                  <Badge variant="green" className="mt-1.5">
+                    <Check size={10} strokeWidth={3} />
+                    Identidad validada
+                  </Badge>
                 </div>
               </div>
-
-              {/* Profile fields */}
-              <ul className="space-y-1.5" aria-label="Datos personales">
-                {profileFields.map(({ emoji, value }) => (
-                  <li key={value} className="flex items-center gap-2 text-caption text-white/65">
-                    <span aria-hidden="true">{emoji}</span>
-                    <span>{value}</span>
-                  </li>
-                ))}
-              </ul>
             </div>
 
             {/* Menu items */}
             <nav className="flex-1 overflow-y-auto py-2" aria-label="Menú principal">
-              {menuItems.map(({ icon: Icon, label, href }) => {
+              {menuItems.map(({ icon: Icon, label, href, external }) => {
                 const content = (
                   <div className="flex items-center gap-3.5 px-5 py-[15px] w-full border-b border-surface-tertiary/60 transition-colors hover:bg-surface-secondary active:bg-surface-tertiary">
                     <div className="w-9 h-9 rounded-ios-sm bg-surface-secondary flex items-center justify-center shrink-0">
@@ -126,14 +110,14 @@ export function DrawerNavigation({ isOpen, onClose }: DrawerProps) {
                   </div>
                 )
 
-                return href ? (
+                return external ? (
+                  <a key={label} href={href} target="_blank" rel="noopener noreferrer" onClick={onClose}>
+                    {content}
+                  </a>
+                ) : (
                   <Link key={label} href={href} onClick={onClose}>
                     {content}
                   </Link>
-                ) : (
-                  <button key={label} onClick={onClose} className="w-full text-left">
-                    {content}
-                  </button>
                 )
               })}
 

@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
+import { motion } from 'framer-motion'
 import { Home, Bell, Phone, MessageCircle } from 'lucide-react'
 import { cn } from '@/utils/cn'
 import { TINA_URL } from '@/utils/constants'
@@ -27,12 +28,16 @@ export function FloatingTabBar() {
 
   return (
     <nav
-      className="tabbar-glass fixed bottom-0 left-0 right-0 z-50 max-w-[390px] sm:max-w-[480px] md:max-w-[640px] mx-auto"
-      style={{ height: 83 }}
+      className={cn(
+        'tabbar-glass fixed bottom-3 left-3 right-3 z-50 mx-auto',
+        'max-w-[366px] sm:max-w-[456px] md:max-w-[616px]',
+        'rounded-[28px]'
+      )}
+      style={{ height: 'var(--tabbar-height)' }}
       role="tablist"
       aria-label="Navegación principal"
     >
-      <div className="flex items-start pt-2.5 h-full">
+      <div className="relative flex items-center h-full px-1.5">
         {tabs.map(({ id, label, href, Icon, ariaLabel }) => {
           const active = isActiveTab(href, pathname)
 
@@ -47,10 +52,10 @@ export function FloatingTabBar() {
                 role="tab"
                 aria-selected={false}
                 aria-label={ariaLabel}
-                className="flex-1 flex flex-col items-center gap-1 pt-1.5 pb-1 min-h-[44px] touch-target"
+                className="relative flex-1 flex flex-col items-center justify-center gap-0.5 h-full min-h-[44px] touch-target"
               >
                 <Icon
-                  size={24}
+                  size={22}
                   strokeWidth={1.8}
                   className="transition-colors duration-150"
                   color="#8E8E93"
@@ -69,19 +74,26 @@ export function FloatingTabBar() {
               role="tab"
               aria-selected={active}
               aria-label={ariaLabel}
-              className="flex-1 flex flex-col items-center gap-1 pt-1.5 pb-1 min-h-[44px] touch-target"
+              className="relative flex-1 flex flex-col items-center justify-center gap-0.5 h-full min-h-[44px] touch-target"
             >
+              {active && (
+                <motion.div
+                  layoutId="tabbar-active-indicator"
+                  className="tabbar-indicator absolute inset-1 rounded-[20px]"
+                  transition={{ type: 'spring', stiffness: 500, damping: 35 }}
+                />
+              )}
               <Icon
-                size={24}
+                size={22}
                 strokeWidth={active ? 2 : 1.8}
                 className={cn(
-                  'transition-colors duration-150',
+                  'relative transition-colors duration-150',
                   active ? 'text-navy-900' : 'text-[#8E8E93]'
                 )}
               />
               <span
                 className={cn(
-                  'text-tab transition-colors duration-150',
+                  'relative text-tab transition-colors duration-150',
                   active ? 'font-semibold text-navy-900' : 'font-medium text-[#8E8E93]'
                 )}
               >

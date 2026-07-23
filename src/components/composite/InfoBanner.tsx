@@ -1,8 +1,9 @@
+import type { LucideIcon } from 'lucide-react'
 import { cn } from '@/utils/cn'
 
 interface InfoBannerProps {
-  emoji: string
-  emojiAriaLabel?: string
+  icon: LucideIcon
+  iconAriaLabel?: string
   title: string
   body: string
   variant?: 'info' | 'warning' | 'success'
@@ -16,8 +17,8 @@ const variantStyles = {
 }
 
 export function InfoBanner({
-  emoji,
-  emojiAriaLabel,
+  icon: Icon,
+  iconAriaLabel,
   title,
   body,
   variant = 'info',
@@ -36,11 +37,11 @@ export function InfoBanner({
       role="note"
     >
       <div
-        className={cn('w-9 h-9 rounded-[10px] flex items-center justify-center shrink-0 text-lg', styles.icon)}
-        aria-label={emojiAriaLabel}
-        aria-hidden={!emojiAriaLabel}
+        className={cn('w-9 h-9 rounded-[10px] flex items-center justify-center shrink-0', styles.icon)}
+        aria-label={iconAriaLabel}
+        aria-hidden={!iconAriaLabel}
       >
-        {emoji}
+        <Icon size={17} color="white" strokeWidth={2} />
       </div>
       <div>
         <p className={cn('font-sans font-bold text-caption leading-snug', styles.title)}>{title}</p>

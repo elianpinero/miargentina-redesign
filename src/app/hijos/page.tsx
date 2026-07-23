@@ -1,6 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
+import { Baby } from 'lucide-react'
 import { pageVariants } from '@/design-system/motion'
 import { ModuleHeader } from '@/components/composite/AppHeader'
 import { EmptyState } from '@/components/composite/EmptyState'
@@ -13,8 +14,8 @@ export default function HijosPage() {
       <ModuleHeader title="Hijos" subtitle="Menores asociados" />
       <PageContainer>
         <EmptyState
-          emoji="👶"
-          emojiLabel="Sin hijos asociados"
+          icon={Baby}
+          iconLabel="Sin hijos asociados"
           title="Sin hijos asociados"
           description="Asociá a tus hijos menores a tu perfil para acceder a sus documentos"
           action={

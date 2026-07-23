@@ -1,7 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { ChevronRight } from 'lucide-react'
+import { ChevronRight, Calendar } from 'lucide-react'
 import { pageVariants } from '@/design-system/motion'
 import { ModuleHeader } from '@/components/composite/AppHeader'
 import { EmptyState } from '@/components/composite/EmptyState'
@@ -17,7 +17,8 @@ export default function TurnosPage() {
       <ModuleHeader title="Turnos" subtitle="Tus turnos agendados" />
       <PageContainer className="space-y-4">
         <EmptyState
-          emoji="📅"
+          icon={Calendar}
+          iconLabel="Sin turnos programados"
           title="Sin turnos programados"
           description="Agendá un turno en organismos del Estado de forma rápida y segura"
           action={<Button size="sm" variant="primary" className="!w-auto px-6">Solicitar turno</Button>}

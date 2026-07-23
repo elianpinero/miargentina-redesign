@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion'
 import Link from 'next/link'
+import { Calendar, Zap, Route } from 'lucide-react'
 import { pageVariants } from '@/design-system/motion'
 import { ModuleHeader } from '@/components/composite/AppHeader'
 import { Card } from '@/components/primitives/Card'
@@ -17,7 +18,9 @@ export default function TramitesPage() {
         {/* Turnos */}
         <Card className="space-y-3.5">
           <div className="flex items-center gap-3">
-            <div className="w-11 h-11 rounded-ios-lg bg-warning-soft flex items-center justify-center text-2xl shrink-0" aria-hidden="true">📅</div>
+            <div className="w-11 h-11 rounded-ios-lg bg-warning-soft flex items-center justify-center shrink-0" aria-hidden="true">
+              <Calendar size={22} color="#D9480F" strokeWidth={1.8} />
+            </div>
             <div>
               <p className="font-sans font-bold text-body text-text-primary">Turnos</p>
               <p className="font-sans text-caption text-text-secondary mt-0.5">Agendá turnos en organismos del Estado</p>
@@ -29,7 +32,9 @@ export default function TramitesPage() {
         {/* Subsidios */}
         <Card className="space-y-3.5">
           <div className="flex items-center gap-3">
-            <div className="w-11 h-11 rounded-ios-lg bg-[#EEF2FF] flex items-center justify-center text-2xl shrink-0" aria-hidden="true">⚡</div>
+            <div className="w-11 h-11 rounded-ios-lg bg-[#EEF2FF] flex items-center justify-center shrink-0" aria-hidden="true">
+              <Zap size={22} color="#3B5BDB" strokeWidth={1.8} />
+            </div>
             <p className="font-sans font-bold text-body text-text-primary">Subsidios</p>
           </div>
           <div className="py-2.5 border-b border-surface-tertiary/60">
@@ -41,7 +46,9 @@ export default function TramitesPage() {
         {/* Peajes */}
         <Card className="space-y-3.5">
           <div className="flex items-center gap-3">
-            <div className="w-11 h-11 rounded-ios-lg bg-success-soft flex items-center justify-center text-2xl shrink-0" aria-hidden="true">🛣️</div>
+            <div className="w-11 h-11 rounded-ios-lg bg-success-soft flex items-center justify-center shrink-0" aria-hidden="true">
+              <Route size={22} color="#16A34A" strokeWidth={1.8} />
+            </div>
             <div>
               <p className="font-sans font-bold text-body text-text-primary">Exención de peajes</p>
               <p className="font-sans text-caption text-text-secondary mt-0.5">Solicitá tu pase libre</p>

@@ -1,6 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
+import { IdCard, Car, ClipboardList } from 'lucide-react'
 import { pageVariants } from '@/design-system/motion'
 import { ModuleHeader } from '@/components/composite/AppHeader'
 import { AccordionItem } from '@/components/composite/AccordionItem'
@@ -16,8 +17,9 @@ export default function DocumentosPage() {
         {/* DNI */}
         <AccordionItem
           title="Documento Nacional de Identidad (DNI)"
-          iconEmoji="🪪"
+          icon={IdCard}
           iconBg="#E8F0FE"
+          iconColor="#3B5BDB"
           defaultOpen
         >
           <div className="space-y-3">
@@ -36,8 +38,9 @@ export default function DocumentosPage() {
         {/* Licencia */}
         <AccordionItem
           title="Licencia Nacional de Conducir"
-          iconEmoji="🚗"
+          icon={Car}
           iconBg="#E3F9E5"
+          iconColor="#2B8A3E"
         >
           <div className="space-y-3">
             <p className="font-sans text-body-sm text-text-secondary leading-relaxed">
@@ -53,8 +56,9 @@ export default function DocumentosPage() {
         {/* Antecedentes */}
         <AccordionItem
           title="Antecedentes Penales"
-          iconEmoji="📋"
+          icon={ClipboardList}
           iconBg="#F3F0FF"
+          iconColor="#7048E8"
         >
           <div className="space-y-3">
             <p className="font-sans text-body-sm text-text-secondary leading-relaxed">

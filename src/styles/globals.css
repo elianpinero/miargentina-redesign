@@ -25,10 +25,11 @@
   --success-soft: #e2f6ec;
   --info-soft: #d0e7f8;
 
-  /* Tab Bar (iOS) */
-  --tabbar-height: 83px;
-  --tabbar-bg: rgba(255, 255, 255, 0.85);
-  --tabbar-border: rgba(0, 0, 0, 0.08);
+  /* Tab Bar (iOS Liquid Glass) */
+  --tabbar-height: 64px;
+  --tabbar-inset: 12px;
+  --tabbar-bg: rgba(255, 255, 255, 0.6);
+  --tabbar-border: rgba(255, 255, 255, 0.5);
 
   /* Safe areas */
   --safe-top: env(safe-area-inset-top, 0px);
@@ -124,12 +125,21 @@ a,
     border: 1px solid rgba(255, 255, 255, 0.12);
   }
 
-  /* iOS Tab Bar */
+  /* iOS Liquid Glass tab bar — floating, refractive pill */
   .tabbar-glass {
     background: var(--tabbar-bg);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border-top: 0.5px solid var(--tabbar-border);
+    backdrop-filter: blur(28px) saturate(180%);
+    -webkit-backdrop-filter: blur(28px) saturate(180%);
+    border: 1px solid var(--tabbar-border);
+    box-shadow:
+      0 8px 32px rgba(11, 23, 66, 0.16),
+      0 1px 1px rgba(255, 255, 255, 0.7) inset,
+      0 -1px 1px rgba(11, 23, 66, 0.04) inset;
+  }
+
+  /* Sliding active-tab indicator */
+  .tabbar-indicator {
+    background: rgba(11, 23, 66, 0.06);
   }
 
   /* Institutional header gradient */
@@ -164,7 +174,7 @@ a,
 
   /* Safe area padding */
   .pb-safe {
-    padding-bottom: calc(var(--tabbar-height) + 16px + var(--safe-bottom));
+    padding-bottom: calc(var(--tabbar-height) + var(--tabbar-inset) + 24px + var(--safe-bottom));
   }
 
   .pt-safe {

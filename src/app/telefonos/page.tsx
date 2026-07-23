@@ -20,17 +20,17 @@ export default function TelefonosPage() {
         animate="animate"
         aria-label="Teléfonos de emergencia"
       >
-        {EMERGENCY_PHONES.map(({ number, label, emoji, bgColor }) => (
+        {EMERGENCY_PHONES.map(({ number, label, Icon, bgColor, iconColor }) => (
           <motion.li key={number} variants={staggerItem}>
             <div className="card-surface p-0 overflow-hidden">
               <div className="flex items-center gap-3.5 px-4 py-3.5">
                 {/* Icon */}
                 <div
-                  className="w-11 h-11 rounded-[13px] flex items-center justify-center text-xl shrink-0"
+                  className="w-11 h-11 rounded-[13px] flex items-center justify-center shrink-0"
                   style={{ background: bgColor }}
                   aria-hidden="true"
                 >
-                  {emoji}
+                  <Icon size={19} color={iconColor} strokeWidth={1.8} />
                 </div>
 
                 {/* Label */}
@@ -45,7 +45,7 @@ export default function TelefonosPage() {
                   </span>
                   <a
                     href={`tel:${number}`}
-                    aria-label={`Llamar al ${number} — ${label}`}
+                    aria-label={`Llamar al ${number} - ${label}`}
                     className="w-8 h-8 rounded-full flex items-center justify-center transition-opacity active:opacity-70"
                     style={{ background: bgColor }}
                   >

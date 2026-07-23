@@ -1,7 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { Download } from 'lucide-react'
+import { Download, Briefcase } from 'lucide-react'
 import { pageVariants } from '@/design-system/motion'
 import { ModuleHeader } from '@/components/composite/AppHeader'
 import { Card } from '@/components/primitives/Card'
@@ -18,8 +18,8 @@ export default function TrabajoPage() {
         {/* CUIL Card */}
         <Card className="space-y-4">
           <div className="flex items-center gap-3">
-            <div className="w-12 h-12 rounded-ios-lg bg-warning-soft flex items-center justify-center text-2xl shrink-0" aria-hidden="true">
-              💼
+            <div className="w-12 h-12 rounded-ios-lg bg-warning-soft flex items-center justify-center shrink-0" aria-hidden="true">
+              <Briefcase size={24} color="#E67700" strokeWidth={1.8} />
             </div>
             <div>
               <p className="font-sans font-extrabold text-title-lg text-text-primary">{MOCK_USER.name}</p>

@@ -1,12 +1,14 @@
 // ─── Feature: Dashboard ───────────────────────────────────────────────────────
 // Types and data specific to the dashboard/home screen.
 
+import { Calendar, IdCard, type LucideIcon } from 'lucide-react'
+
 export interface StatusCard {
   id: string
   label: string
   value: string
   sub: string
-  emoji: string
+  Icon: LucideIcon
   variant: 'neutral' | 'success' | 'warning'
 }
 
@@ -24,7 +26,7 @@ export const getDashboardData = () => ({
       label: 'PRÓXIMO TURNO',
       value: 'Sin turnos',
       sub: 'Solicitá un turno',
-      emoji: '📅',
+      Icon: Calendar,
       variant: 'neutral' as const,
     },
     {
@@ -32,7 +34,7 @@ export const getDashboardData = () => ({
       label: 'CREDENCIALES',
       value: 'Al día',
       sub: 'DNI · Vence 2030',
-      emoji: '🪪',
+      Icon: IdCard,
       variant: 'success' as const,
     },
   ] satisfies StatusCard[],

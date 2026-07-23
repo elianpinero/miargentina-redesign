@@ -107,7 +107,7 @@ export const cobrosService = {
   async getCobros(): Promise<Cobro[]> {
     // Replace with: apiFetch<Cobro[]>('/api/cobros')
     return [
-      { id: '1', programa: 'IFE — Ingreso Familiar', importe: 45000, estado: 'cobrado', fecha: '2025-04' },
+      { id: '1', programa: 'IFE - Ingreso Familiar', importe: 45000, estado: 'cobrado', fecha: '2025-04' },
       { id: '2', programa: 'Asignación Universal por Hijo', importe: 28500, estado: 'cobrado', fecha: '2025-05' },
     ]
   },

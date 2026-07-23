@@ -1,6 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
+import { Wallet, HandHelping } from 'lucide-react'
 import { pageVariants } from '@/design-system/motion'
 import { ModuleHeader } from '@/components/composite/AppHeader'
 import { Card } from '@/components/primitives/Card'
@@ -17,9 +18,11 @@ export default function CobrosPage() {
         {/* PAS Card */}
         <Card className="space-y-3.5">
           <div className="flex items-center gap-3">
-            <div className="w-11 h-11 rounded-ios-lg bg-info-soft flex items-center justify-center text-2xl shrink-0" aria-hidden="true">💰</div>
+            <div className="w-11 h-11 rounded-ios-lg bg-info-soft flex items-center justify-center shrink-0" aria-hidden="true">
+              <Wallet size={22} color="#0EA5E9" strokeWidth={1.8} />
+            </div>
             <div>
-              <p className="font-sans font-bold text-body text-text-primary">Actualización de datos — PAS</p>
+              <p className="font-sans font-bold text-body text-text-primary">Actualización de datos - PAS</p>
               <span className="inline-block mt-1 text-[10px] font-bold bg-warning-soft text-warning-text rounded-pill px-2.5 py-0.5">
                 Acción requerida
               </span>
@@ -34,7 +37,9 @@ export default function CobrosPage() {
         {/* Ayuda card */}
         <Card className="space-y-3.5">
           <div className="flex items-center gap-3">
-            <div className="w-11 h-11 rounded-ios-lg bg-[#EEF2FF] flex items-center justify-center text-2xl shrink-0" aria-hidden="true">🤝</div>
+            <div className="w-11 h-11 rounded-ios-lg bg-[#EEF2FF] flex items-center justify-center shrink-0" aria-hidden="true">
+              <HandHelping size={22} color="#3B5BDB" strokeWidth={1.8} />
+            </div>
             <p className="font-sans font-bold text-body text-text-primary">¿Necesitás ayuda?</p>
           </div>
           <p className="font-sans text-body-sm text-text-secondary leading-relaxed">

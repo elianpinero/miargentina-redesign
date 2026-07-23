@@ -16,7 +16,7 @@ export function ServiceGrid() {
       role="list"
       aria-label="Accesos rápidos a servicios"
     >
-      {MODULES.map((mod) => (
+      {MODULES.map(({ Icon, ...mod }) => (
         <motion.div
           key={mod.id}
           variants={staggerItem}
@@ -40,11 +40,11 @@ export function ServiceGrid() {
             >
               {/* Icon */}
               <div
-                className="w-[46px] h-[46px] rounded-[13px] flex items-center justify-center text-[22px]"
+                className="w-[46px] h-[46px] rounded-[13px] flex items-center justify-center"
                 style={{ background: mod.iconBg }}
                 aria-hidden="true"
               >
-                {mod.emoji}
+                <Icon size={21} color={mod.iconColor} strokeWidth={1.8} />
               </div>
 
               {/* Label */}

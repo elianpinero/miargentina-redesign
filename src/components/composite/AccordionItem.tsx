@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { ChevronDown } from 'lucide-react'
+import { ChevronDown, type LucideIcon } from 'lucide-react'
 import { cn } from '@/utils/cn'
 import { accordionVariants, transitions } from '@/design-system/motion'
 
@@ -10,8 +10,9 @@ import { accordionVariants, transitions } from '@/design-system/motion'
 interface AccordionItemProps {
   title: string
   children: React.ReactNode
-  iconEmoji?: string
+  icon?: LucideIcon
   iconBg?: string
+  iconColor?: string
   defaultOpen?: boolean
   className?: string
 }
@@ -20,8 +21,9 @@ interface AccordionItemProps {
 export function AccordionItem({
   title,
   children,
-  iconEmoji,
+  icon: Icon,
   iconBg = '#EEF2FF',
+  iconColor = '#0B1742',
   defaultOpen = false,
   className,
 }: AccordionItemProps) {
@@ -45,13 +47,13 @@ export function AccordionItem({
         aria-expanded={isOpen}
       >
         <div className="flex items-center gap-3">
-          {iconEmoji && (
+          {Icon && (
             <div
-              className="w-9 h-9 rounded-ios-sm flex items-center justify-center text-lg shrink-0"
+              className="w-9 h-9 rounded-ios-sm flex items-center justify-center shrink-0"
               style={{ background: iconBg }}
               aria-hidden="true"
             >
-              {iconEmoji}
+              <Icon size={17} color={iconColor} strokeWidth={1.8} />
             </div>
           )}
           <span className="font-sans font-bold text-body text-text-primary">{title}</span>

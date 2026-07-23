@@ -1,6 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
+import { AlertTriangle, IdCard, Car } from 'lucide-react'
 import { pageVariants } from '@/design-system/motion'
 import { ModuleHeader } from '@/components/composite/AppHeader'
 import { AccordionItem } from '@/components/composite/AccordionItem'
@@ -16,7 +17,7 @@ export default function VehiculosPage() {
 
         {/* Warning banner */}
         <InfoBanner
-          emoji="⚠️"
+          icon={AlertTriangle}
           variant="warning"
           title="Viajes al exterior"
           body="Si viajás al exterior y no contás con cédula física y/o patente, comunicate con la DNRPA para asesorarte"
@@ -25,13 +26,14 @@ export default function VehiculosPage() {
         {/* Licencia accordion */}
         <AccordionItem
           title="Licencia Nacional de Conducir"
-          iconEmoji="🪪"
+          icon={IdCard}
           iconBg="#E8F0FE"
+          iconColor="#3B5BDB"
           defaultOpen
         >
           <ul className="divide-y divide-surface-tertiary/60">
             {[
-              { label: 'Categoría', value: 'B — Automóviles', badge: null },
+              { label: 'Categoría', value: 'B - Automóviles', badge: null },
               { label: 'Vence',    value: null,               badge: <Badge variant="gold">18/09/2025</Badge> },
               { label: 'Estado',  value: null,               badge: <Badge variant="green">Vigente</Badge> },
             ].map(({ label, value, badge }) => (
@@ -46,8 +48,9 @@ export default function VehiculosPage() {
         {/* Vehículos accordion */}
         <AccordionItem
           title="Vehículos habilitados a conducir"
-          iconEmoji="🚗"
+          icon={Car}
           iconBg="#E3F9E5"
+          iconColor="#2B8A3E"
         >
           <div className="border border-surface-tertiary/60 rounded-ios-lg p-4 space-y-3">
             <div className="flex items-center justify-between">

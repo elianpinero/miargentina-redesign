@@ -4,6 +4,7 @@ import { useRouter } from 'next/navigation'
 import { ChevronLeft, Menu } from 'lucide-react'
 import { Avatar } from '@/components/primitives'
 import { MOCK_USER } from '@/utils/constants'
+import { formatTodayLong } from '@/utils/feriados'
 import { cn } from '@/utils/cn'
 
 // ─── Dashboard Header ─────────────────────────────────────────────────────────
@@ -14,7 +15,7 @@ interface DashboardHeaderProps {
 export function DashboardHeader({ onMenuOpen }: DashboardHeaderProps) {
   return (
     <header
-      className="header-gradient px-5 pt-12 pb-5 sticky top-0 z-40"
+      className="bg-navy-900 px-5 pt-12 pb-3 sticky top-0 z-40"
       role="banner"
     >
       <div className="flex items-center justify-between">
@@ -45,12 +46,23 @@ export function DashboardHeader({ onMenuOpen }: DashboardHeaderProps) {
           aria-label={`Perfil de ${MOCK_USER.name}`}
         />
       </div>
+    </header>
+  )
+}
 
-      {/* Greeting */}
-      <p className="mt-3.5 font-sans font-semibold text-body-lg text-white/90">
+// ─── Dashboard Greeting ───────────────────────────────────────────────────────
+// Rendered as part of the same header-gradient block as the status cards, so
+// the gradient runs continuously instead of restarting on a separate element.
+export function DashboardGreeting() {
+  return (
+    <div className="px-1 pb-4">
+      <p className="font-sans font-semibold text-body-lg text-white/90">
         ¡Hola {MOCK_USER.name}!
       </p>
-    </header>
+      <p className="mt-0.5 font-sans text-caption text-white/55">
+        {formatTodayLong()}
+      </p>
+    </div>
   )
 }
 

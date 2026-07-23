@@ -26,7 +26,7 @@ function ShellInner({ children }: { children: ReactNode }) {
 
   return (
     <div className="relative max-w-[390px] sm:max-w-[480px] md:max-w-[640px] mx-auto min-h-screen bg-surface-secondary overflow-x-hidden md:shadow-card">
-      <main id="main-content" className="pb-[83px]">
+      <main id="main-content" className="pb-[100px]">
         {children}
       </main>
 
