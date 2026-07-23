@@ -100,14 +100,14 @@ export const MOCK_USER: UserProfile = {
   address: 'Av. Corrientes 1234, CABA',
   dni: '34.567.890',
   birthdate: '15/03/1990',
-  gender: 'Varón',
+  gender: 'Masculino',
   nationality: 'Argentina',
   initials: 'VP',
   isVerified: true,
 }
 
 // ─── Tina WhatsApp ────────────────────────────────────────────────────────────
-export const TINA_URL = 'https://api.whatsapp.com/send?phone=5491139101010'
+export const TINA_URL = 'https://api.whatsapp.com/send?phone=541139101010'
 
 // ─── External links ──────────────────────────────────────────────────────────
 export const TERMS_URL = 'https://www.argentina.gob.ar/miargentina/terminos-y-condiciones'

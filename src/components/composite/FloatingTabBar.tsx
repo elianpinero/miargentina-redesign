@@ -29,7 +29,7 @@ export function FloatingTabBar() {
   return (
     <nav
       className={cn(
-        'tabbar-glass fixed bottom-3 left-3 right-3 z-50 mx-auto',
+        'tabbar-glass fixed bottom-6 left-3 right-3 z-50 mx-auto',
         'max-w-[366px] sm:max-w-[456px] md:max-w-[616px]',
         'rounded-[28px]'
       )}

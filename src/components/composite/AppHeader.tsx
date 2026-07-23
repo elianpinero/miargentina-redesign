@@ -1,6 +1,7 @@
 'use client'
 
 import { useRouter } from 'next/navigation'
+import { motion, useScroll, useTransform } from 'framer-motion'
 import { ChevronLeft, Menu } from 'lucide-react'
 import { Avatar } from '@/components/primitives'
 import { MOCK_USER } from '@/utils/constants'
@@ -13,12 +14,25 @@ interface DashboardHeaderProps {
 }
 
 export function DashboardHeader({ onMenuOpen }: DashboardHeaderProps) {
+  // On scroll, the icon row compacts and turns into a frosted glass bar —
+  // menu icon and avatar shrink/float together, matching the tab bar's glass look.
+  const { scrollY } = useScroll()
+  const blur = useTransform(scrollY, [0, 70], [0, 22])
+  const bgAlpha = useTransform(scrollY, [0, 70], [1, 0.68])
+  const scale = useTransform(scrollY, [0, 70], [1, 0.92])
+  const backdropFilter = useTransform(blur, (v) => `blur(${v}px) saturate(180%)`)
+  const backgroundColor = useTransform(bgAlpha, (a) => `rgba(11, 23, 66, ${a})`)
+
   return (
-    <header
-      className="bg-navy-900 px-5 pt-12 pb-3 sticky top-0 z-40"
+    <motion.header
+      className="px-5 pt-12 pb-3 -mb-px sticky top-0 z-40"
+      style={{ backgroundColor, backdropFilter, WebkitBackdropFilter: backdropFilter }}
       role="banner"
     >
-      <div className="flex items-center justify-between">
+      <motion.div
+        className="flex items-center justify-between"
+        style={{ scale, transformOrigin: 'top center' }}
+      >
         {/* Hamburger menu */}
         <button
           onClick={onMenuOpen}
@@ -45,8 +59,8 @@ export function DashboardHeader({ onMenuOpen }: DashboardHeaderProps) {
           size="md"
           aria-label={`Perfil de ${MOCK_USER.name}`}
         />
-      </div>
-    </header>
+      </motion.div>
+    </motion.header>
   )
 }
 

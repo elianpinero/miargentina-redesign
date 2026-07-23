@@ -27,7 +27,7 @@
 
   /* Tab Bar (iOS Liquid Glass) */
   --tabbar-height: 64px;
-  --tabbar-inset: 12px;
+  --tabbar-inset: 24px;
   --tabbar-bg: rgba(255, 255, 255, 0.6);
   --tabbar-border: rgba(255, 255, 255, 0.5);
 
@@ -142,9 +142,11 @@ a,
     background: rgba(11, 23, 66, 0.06);
   }
 
-  /* Institutional header gradient */
+  /* Institutional header gradient — stays flat navy-900 near the top so it
+     matches the sticky icon-row bar exactly with no visible seam, then eases
+     into navy-800 further down. */
   .header-gradient {
-    background: linear-gradient(160deg, var(--navy-900) 0%, var(--navy-800) 100%);
+    background: linear-gradient(160deg, var(--navy-900) 0%, var(--navy-900) 45%, var(--navy-800) 100%);
   }
 
   /* Section label */

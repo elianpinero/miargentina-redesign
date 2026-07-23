@@ -1,7 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { Mail, Phone, MapPin, CreditCard, Cake, Globe, Check } from 'lucide-react'
+import { Mail, Phone, MapPin, CreditCard, Cake, UserRound, Globe, Check } from 'lucide-react'
 import { pageVariants } from '@/design-system/motion'
 import { ModuleHeader } from '@/components/composite/AppHeader'
 import { Avatar, Badge, Card, CardRow } from '@/components/primitives'
@@ -13,7 +13,8 @@ const personalFields = [
   { Icon: Phone,      label: 'Teléfono',     value: MOCK_USER.phone },
   { Icon: MapPin,     label: 'Domicilio',    value: MOCK_USER.address },
   { Icon: CreditCard, label: 'DNI',          value: MOCK_USER.dni },
-  { Icon: Cake,       label: 'Nacimiento',   value: `${MOCK_USER.birthdate} - ${MOCK_USER.gender}` },
+  { Icon: Cake,       label: 'Nacimiento',   value: MOCK_USER.birthdate },
+  { Icon: UserRound,  label: 'Sexo',         value: MOCK_USER.gender },
   { Icon: Globe,      label: 'Nacionalidad', value: MOCK_USER.nationality },
 ] as const
 
