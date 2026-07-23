@@ -53,7 +53,7 @@ export function DrawerNavigation({ isOpen, onClose }: DrawerProps) {
     <AnimatePresence>
       {isOpen && (
         <div
-          className="fixed inset-0 z-[900] max-w-[390px] mx-auto"
+          className="fixed inset-0 z-[900] max-w-[390px] sm:max-w-[480px] md:max-w-[640px] mx-auto"
           role="dialog"
           aria-modal="true"
           aria-label="Menú de navegación"

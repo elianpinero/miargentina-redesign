@@ -27,7 +27,7 @@ export function FloatingTabBar() {
 
   return (
     <nav
-      className="tabbar-glass fixed bottom-0 left-0 right-0 z-50 max-w-[390px] mx-auto"
+      className="tabbar-glass fixed bottom-0 left-0 right-0 z-50 max-w-[390px] sm:max-w-[480px] md:max-w-[640px] mx-auto"
       style={{ height: 83 }}
       role="tablist"
       aria-label="Navegación principal"

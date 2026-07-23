@@ -88,16 +88,16 @@ export const EMERGENCY_PHONES: EmergencyPhone[] = [
 
 // ─── Mock user ────────────────────────────────────────────────────────────────
 export const MOCK_USER: UserProfile = {
-  name: 'Matías Elian',
+  name: 'Valentín Perez',
   cuil: '20-34567890-1',
-  email: 'matias.elian@gmail.com',
+  email: 'valentin.perez@gmail.com',
   phone: '+54 9 11 3910 1010',
   address: 'Av. Corrientes 1234, CABA',
   dni: '34.567.890',
   birthdate: '15/03/1990',
   gender: 'Varón',
   nationality: 'Argentina',
-  initials: 'ME',
+  initials: 'VP',
   isVerified: true,
 }
 

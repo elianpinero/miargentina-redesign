@@ -25,7 +25,7 @@ function ShellInner({ children }: { children: ReactNode }) {
   }, [openDrawer])
 
   return (
-    <div className="relative max-w-[390px] mx-auto min-h-screen bg-surface-secondary overflow-x-hidden">
+    <div className="relative max-w-[390px] sm:max-w-[480px] md:max-w-[640px] mx-auto min-h-screen bg-surface-secondary overflow-x-hidden md:shadow-card">
       <main id="main-content" className="pb-[83px]">
         {children}
       </main>
