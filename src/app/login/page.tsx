@@ -11,7 +11,7 @@ export default function LoginWelcomePage() {
       variants={pageVariants}
       initial="initial"
       animate="animate"
-      className="min-h-screen flex flex-col header-gradient"
+      className="min-h-screen flex flex-col bg-white"
     >
       {/* Branding */}
       <div className="flex-1 flex flex-col items-center justify-center px-8 text-center">
@@ -20,13 +20,13 @@ export default function LoginWelcomePage() {
           src="/images/escudo-nacional.svg"
           alt="Escudo Nacional Argentino"
           className="h-24 w-auto mb-6"
-          style={{ filter: 'drop-shadow(0 8px 16px rgba(0,0,0,0.3))' }}
+          style={{ filter: 'drop-shadow(0 8px 16px rgba(11,23,66,0.25))' }}
         />
         <h1 className="font-serif font-bold text-[32px] leading-tight">
           <span className="text-gold-500">Mi</span>{' '}
-          <span className="text-white">Argentina</span>
+          <span className="text-text-primary">Argentina</span>
         </h1>
-        <p className="font-sans text-body-sm text-white/55 mt-2 max-w-[280px]">
+        <p className="font-sans text-body-sm text-text-secondary mt-2 max-w-[280px]">
           Tu acceso a los servicios digitales del Estado Nacional
         </p>
       </div>
@@ -39,7 +39,7 @@ export default function LoginWelcomePage() {
           </Button>
         </Link>
         <Link href="/login/registro" className="block">
-          <Button variant="outline" fullWidth size="lg" className="border-white text-white hover:bg-white/10">
+          <Button variant="outline" fullWidth size="lg">
             Crear cuenta
           </Button>
         </Link>
