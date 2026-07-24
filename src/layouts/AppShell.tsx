@@ -1,7 +1,9 @@
 'use client'
 
 import { useEffect, type ReactNode } from 'react'
+import { usePathname, useRouter } from 'next/navigation'
 import { AppStateProvider, useAppState } from '@/state/appState'
+import { AuthProvider, useAuth } from '@/state/authState'
 import { DrawerNavigation } from '@/components/composite/DrawerNavigation'
 import { FloatingTabBar } from '@/components/composite/FloatingTabBar'
 
@@ -14,7 +16,7 @@ declare global {
   }
 }
 
-function ShellInner({ children }: { children: ReactNode }) {
+function ShellChrome({ children }: { children: ReactNode }) {
   const { drawerOpen, openDrawer, closeDrawer } = useAppState()
 
   useEffect(() => {
@@ -25,7 +27,7 @@ function ShellInner({ children }: { children: ReactNode }) {
   }, [openDrawer])
 
   return (
-    <div className="relative max-w-[390px] sm:max-w-[480px] md:max-w-[640px] mx-auto min-h-screen bg-surface-secondary md:shadow-card">
+    <>
       <main id="main-content" className="pb-[112px]">
         {children}
       </main>
@@ -33,15 +35,61 @@ function ShellInner({ children }: { children: ReactNode }) {
       <FloatingTabBar />
 
       <DrawerNavigation isOpen={drawerOpen} onClose={closeDrawer} />
+    </>
+  )
+}
+
+// ─── Auth gate ────────────────────────────────────────────────────────────────
+// /login/* renders on its own, with no TabBar/Drawer chrome and no auth check.
+// Everything else requires a session — while that's being resolved (reading
+// sessionStorage on mount) or missing, show a loading screen instead of ever
+// flashing protected content.
+function AuthLoadingScreen() {
+  return (
+    <div className="min-h-screen flex items-center justify-center header-gradient">
+      <div
+        className="w-8 h-8 rounded-full border-[3px] border-white/25 border-t-white animate-spin"
+        role="status"
+        aria-label="Cargando"
+      />
     </div>
+  )
+}
+
+function AuthGate({ children }: { children: ReactNode }) {
+  const { isAuthenticated, isLoading } = useAuth()
+  const pathname = usePathname()
+  const router = useRouter()
+  const isLoginRoute = pathname?.startsWith('/login') ?? false
+
+  useEffect(() => {
+    if (!isLoading && !isAuthenticated && !isLoginRoute) {
+      router.replace('/login')
+    }
+  }, [isLoading, isAuthenticated, isLoginRoute, router])
+
+  if (isLoginRoute) {
+    return <>{children}</>
+  }
+
+  if (isLoading || !isAuthenticated) {
+    return <AuthLoadingScreen />
+  }
+
+  return (
+    <AppStateProvider>
+      <ShellChrome>{children}</ShellChrome>
+    </AppStateProvider>
   )
 }
 
 // ─── Public component ────────────────────────────────────────────────────────
 export function AppShell({ children }: { children: ReactNode }) {
   return (
-    <AppStateProvider>
-      <ShellInner>{children}</ShellInner>
-    </AppStateProvider>
+    <AuthProvider>
+      <div className="relative max-w-[390px] sm:max-w-[480px] md:max-w-[640px] mx-auto min-h-screen bg-surface-secondary md:shadow-card">
+        <AuthGate>{children}</AuthGate>
+      </div>
+    </AuthProvider>
   )
 }

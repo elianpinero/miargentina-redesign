@@ -2,10 +2,12 @@
 
 import { useEffect } from 'react'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import { motion, AnimatePresence } from 'framer-motion'
 import { ChevronRight, LogOut, Home, User, Baby, PlusSquare, Lock, Info, FileText, Pencil, Check } from 'lucide-react'
 import { Avatar, Badge } from '@/components/primitives'
 import { MOCK_USER, TERMS_URL } from '@/utils/constants'
+import { useAuth } from '@/state/authState'
 import { drawerVariants, drawerOverlayVariants } from '@/design-system/motion'
 
 // ─── Types ────────────────────────────────────────────────────────────────────
@@ -26,6 +28,15 @@ const menuItems = [
 
 // ─── Component ────────────────────────────────────────────────────────────────
 export function DrawerNavigation({ isOpen, onClose }: DrawerProps) {
+  const router = useRouter()
+  const { logout } = useAuth()
+
+  const handleLogout = () => {
+    onClose()
+    logout()
+    router.push('/login')
+  }
+
   // Lock body scroll when open
   useEffect(() => {
     if (isOpen) document.body.style.overflow = 'hidden'
@@ -123,7 +134,7 @@ export function DrawerNavigation({ isOpen, onClose }: DrawerProps) {
 
               {/* Cerrar sesión */}
               <button
-                onClick={onClose}
+                onClick={handleLogout}
                 className="flex items-center gap-3.5 px-5 py-[15px] w-full border-b border-surface-tertiary/60 transition-colors hover:bg-danger-soft/50"
               >
                 <div className="w-9 h-9 rounded-ios-sm bg-danger-soft flex items-center justify-center shrink-0">
