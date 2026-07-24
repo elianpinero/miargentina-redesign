@@ -8,6 +8,7 @@ import { AccordionItem } from '@/components/composite/AccordionItem'
 import { Button, Divider } from '@/components/primitives'
 import { PageContainer } from '@/layouts/PageContainer'
 import { MOCK_USER } from '@/utils/constants'
+import { useToday } from '@/hooks'
 
 // ─── Decorative QR code — deterministic pattern, not a real scannable code ────
 function DecorativeQRCode({ size = 152 }: { size?: number }) {
@@ -65,8 +66,10 @@ export default function DocumentosPage() {
   const [nombre, ...apellidoParts] = MOCK_USER.name.split(' ')
   const apellido = apellidoParts.join(' ')
 
-  const today = new Date()
-  const lastUpdated = `${String(today.getDate()).padStart(2, '0')}/${String(today.getMonth() + 1).padStart(2, '0')}/${today.getFullYear()}`
+  const today = useToday()
+  const lastUpdated = today
+    ? `${String(today.getDate()).padStart(2, '0')}/${String(today.getMonth() + 1).padStart(2, '0')}/${today.getFullYear()}`
+    : '—'
 
   return (
     <motion.div variants={pageVariants} initial="initial" animate="animate">

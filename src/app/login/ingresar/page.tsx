@@ -3,13 +3,12 @@
 import { useState, type FormEvent } from 'react'
 import { useRouter } from 'next/navigation'
 import { motion } from 'framer-motion'
-import { ChevronLeft, Mail, Lock, Eye, EyeOff, AlertCircle } from 'lucide-react'
+import { ChevronLeft, IdCard, Lock, Eye, EyeOff, AlertCircle } from 'lucide-react'
 import { pageVariants } from '@/design-system/motion'
 import { Button } from '@/components/primitives'
 import { useAuth } from '@/state/authState'
 import { cn } from '@/utils/cn'
 
-const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 const MIN_PASSWORD_LENGTH = 6
 
 const inputClass =
@@ -17,11 +16,19 @@ const inputClass =
   'font-sans text-body text-text-primary placeholder:text-text-secondary/60 ' +
   'focus:outline-none focus:border-navy-900 transition-colors'
 
+// Auto-inserts dashes as the user types: 20-34567890-1
+function formatCuilInput(value: string): string {
+  const digits = value.replace(/\D/g, '').slice(0, 11)
+  if (digits.length <= 2) return digits
+  if (digits.length <= 10) return `${digits.slice(0, 2)}-${digits.slice(2)}`
+  return `${digits.slice(0, 2)}-${digits.slice(2, 10)}-${digits.slice(10)}`
+}
+
 export default function IngresarPage() {
   const router = useRouter()
   const { login, isLoading } = useAuth()
 
-  const [email, setEmail] = useState('')
+  const [cuil, setCuil] = useState('')
   const [password, setPassword] = useState('')
   const [showPassword, setShowPassword] = useState(false)
   const [formError, setFormError] = useState<string | null>(null)
@@ -30,8 +37,8 @@ export default function IngresarPage() {
     e.preventDefault()
     setFormError(null)
 
-    if (!EMAIL_REGEX.test(email.trim())) {
-      setFormError('Ingresá un email válido')
+    if (cuil.replace(/\D/g, '').length !== 11) {
+      setFormError('Ingresá un CUIL válido (11 dígitos)')
       return
     }
     if (password.length < MIN_PASSWORD_LENGTH) {
@@ -39,11 +46,11 @@ export default function IngresarPage() {
       return
     }
 
-    const success = await login(email, password)
+    const success = await login(cuil, password)
     if (success) {
       router.replace('/')
     } else {
-      setFormError('Email o contraseña incorrectos')
+      setFormError('CUIL o contraseña incorrectos')
     }
   }
 
@@ -71,32 +78,33 @@ export default function IngresarPage() {
       <div className="px-6 pt-4 pb-2">
         <h1 className="font-serif font-bold text-[26px] text-text-primary">Ingresar</h1>
         <p className="font-sans text-body-sm text-text-secondary mt-1">
-          Accedé con tu email y contraseña
+          Accedé con tu CUIL y contraseña
         </p>
       </div>
 
       <form onSubmit={handleSubmit} className="flex-1 flex flex-col gap-4 px-6 pt-4">
-        {/* Email */}
+        {/* CUIL */}
         <div>
           <label
-            htmlFor="email"
+            htmlFor="cuil"
             className="font-sans text-[11px] font-semibold text-text-secondary uppercase tracking-wider mb-1.5 block"
           >
-            Email
+            CUIL
           </label>
           <div className="relative">
-            <Mail
+            <IdCard
               size={18}
               className="absolute left-3.5 top-1/2 -translate-y-1/2 text-text-secondary pointer-events-none"
             />
             <input
-              id="email"
-              name="email"
-              type="email"
-              autoComplete="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="tu@email.com"
+              id="cuil"
+              name="cuil"
+              type="text"
+              inputMode="numeric"
+              autoComplete="username"
+              value={cuil}
+              onChange={(e) => setCuil(formatCuilInput(e.target.value))}
+              placeholder="20-12345678-9"
               className={cn(inputClass, 'pr-4')}
             />
           </div>
@@ -157,7 +165,7 @@ export default function IngresarPage() {
         </Button>
 
         <p className="font-sans text-[11px] text-text-secondary text-center mb-6">
-          Demo: <span className="font-semibold text-text-primary">valentin.perez@gmail.com</span>
+          Demo: <span className="font-semibold text-text-primary">20-34567890-1</span>
           {' / '}
           <span className="font-semibold text-text-primary">demo123</span>
         </p>

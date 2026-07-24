@@ -9,22 +9,25 @@ import { createContext, useContext, useEffect, useState, type ReactNode } from '
 
 // ── Types ─────────────────────────────────────────────────────────────────────
 export interface AuthUser {
-  email: string
+  cuil: string
 }
 
 interface AuthStateValue {
   user: AuthUser | null
   isAuthenticated: boolean
   isLoading: boolean
-  login: (email: string, password: string) => Promise<boolean>
+  login: (cuil: string, password: string) => Promise<boolean>
   logout: () => void
 }
 
 // ── Demo credentials ─────────────────────────────────────────────────────────
-const DEMO_EMAIL = 'valentin.perez@gmail.com'
+// Real Mi Argentina logs in with CUIL, not email — matches MOCK_USER.cuil.
+const DEMO_CUIL = '20-34567890-1'
 const DEMO_PASSWORD = 'demo123'
 const LOGIN_DELAY_MS = 800
 const SESSION_KEY = 'mi-argentina-auth-user'
+
+const onlyDigits = (value: string) => value.replace(/\D/g, '')
 
 // ── Context ───────────────────────────────────────────────────────────────────
 const AuthContext = createContext<AuthStateValue | null>(null)
@@ -45,13 +48,13 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
   }, [])
 
-  const login = async (email: string, password: string): Promise<boolean> => {
+  const login = async (cuil: string, password: string): Promise<boolean> => {
     setIsLoading(true)
     await new Promise((resolve) => setTimeout(resolve, LOGIN_DELAY_MS))
 
-    const isValid = email.trim().toLowerCase() === DEMO_EMAIL && password === DEMO_PASSWORD
+    const isValid = onlyDigits(cuil) === onlyDigits(DEMO_CUIL) && password === DEMO_PASSWORD
     if (isValid) {
-      const loggedInUser: AuthUser = { email: DEMO_EMAIL }
+      const loggedInUser: AuthUser = { cuil: DEMO_CUIL }
       setUser(loggedInUser)
       window.sessionStorage.setItem(SESSION_KEY, JSON.stringify(loggedInUser))
     }
@@ -97,7 +100,7 @@ export function useAuth(): AuthStateValue {
   interface AuthStore {
     user: AuthUser | null
     isLoading: boolean
-    login: (email: string, password: string) => Promise<boolean>
+    login: (cuil: string, password: string) => Promise<boolean>
     logout: () => void
   }
 
@@ -106,7 +109,7 @@ export function useAuth(): AuthStateValue {
       (set) => ({
         user: null,
         isLoading: false,
-        login: async (email, password) => { ... },
+        login: async (cuil, password) => { ... },
         logout: () => set({ user: null }),
       }),
       { name: 'mi-argentina-auth-user', storage: sessionStorage }
